@@ -5,7 +5,6 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 
-
 @Builder
 @Getter
 public class CurrencyDto {

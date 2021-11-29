@@ -4,8 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import pl.kluczewski.currency_converter.webclient.dto.AllRatesDto;
 
-
-
 @Builder
 @Getter
 public class AllCurrencyDto {
