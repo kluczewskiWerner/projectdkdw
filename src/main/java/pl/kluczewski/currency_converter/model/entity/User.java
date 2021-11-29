@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -20,9 +21,7 @@ import java.util.Objects;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
     private String password;
@@ -30,6 +29,9 @@ public class User implements UserDetails {
     private UserRole userRole;
     private Boolean locked = false;
     private Boolean enabled = true;
+    @OneToMany
+    @JoinColumn(name = "userId", updatable = false, insertable = false)
+    private List<ConverterHistory> converterHistory;
 
     public User(String email,
                 String password,
