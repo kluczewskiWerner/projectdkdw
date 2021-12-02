@@ -7,6 +7,6 @@ import pl.kluczewski.currency_converter.model.entity.ConverterHistory;
 import java.util.List;
 
 @Repository
-public interface ConverterHistoryRepository extends JpaRepository<ConverterHistory, Long> {
-    List<ConverterHistory> findAllByUserId(Long userId);
+public interface ConverterHistoryRepository extends JpaRepository<ConverterHistory, String> {
+    List<ConverterHistory> findAllByUserEmail(String userEmail);
 }

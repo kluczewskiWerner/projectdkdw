@@ -16,9 +16,9 @@ public class ConverterHistoryController {
 
     private final ConverterHistoryService converterHistoryService;
 
-    @GetMapping("/all/{userId}")
-    public List<ConverterHistoryDto> getAllHistory(@PathVariable Long userId) {
-        return ConverterHistoryDtoMapper.mapToConverterHistoryDtos(converterHistoryService.getAllValue(userId));
+    @GetMapping("/all/")
+    public List<ConverterHistoryDto> getAllHistory() {
+        return ConverterHistoryDtoMapper.mapToConverterHistoryDtos(converterHistoryService.getAllHistory());
     }
 
     @PostMapping
@@ -26,8 +26,8 @@ public class ConverterHistoryController {
         return converterHistoryService.addHistory(converterHistory);
     }
 
-    @DeleteMapping("{id}")
-    public void deleteHistory(@PathVariable Long id) {
-        converterHistoryService.deleteHistory(id);
+    @DeleteMapping("/{userEmail}/")
+    public void clearAllHistory(@PathVariable String userEmail) {
+        converterHistoryService.deleteHistory(userEmail);
     }
 }

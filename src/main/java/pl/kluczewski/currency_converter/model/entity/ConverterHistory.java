@@ -1,23 +1,23 @@
 package pl.kluczewski.currency_converter.model.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
+@AllArgsConstructor
+@Builder
 public class ConverterHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
+    private String userEmail;
     private String fromCurrencyCode;
     private String toCurrencyCode;
     private BigDecimal startValue;
