@@ -1,8 +1,4 @@
 on:
-  workflow_run:
-    workflows: [Java CI with Maven]
-    types:
-      - completed
   push:
     branches:
       - master
