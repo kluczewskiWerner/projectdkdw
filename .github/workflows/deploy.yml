@@ -5,17 +5,22 @@ on:
 name: Deploy to Heroku
 
 jobs:
-  app1:
-    name: Build and deploy Shiny app
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Build and push Docker to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
+      - uses: actions/checkout@v2
+      - name: Updating Ubuntu system and Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: sudo apt update && sudo apt install heroku neofetch
+      - name: Checking the info
+        run: neofetch
+
+      - uses: akhileshns/heroku-deploy@v3.8.8
         with:
+          heroku_email: notedeagle@gmail.com
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: dkdw-project
-          appdir: "."
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          usedocker: true
+          branch: HEAD
+          useforce: false
+          dynamicFiles: false
