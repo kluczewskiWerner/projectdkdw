@@ -24,6 +24,8 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
+    private String firstName;
+    private String lastName;
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
@@ -33,12 +35,12 @@ public class User implements UserDetails {
     @JoinColumn(name = "userId", updatable = false, insertable = false)
     private List<ConverterHistory> converterHistory;
 
-    public User(String email,
-                String password,
-                UserRole userRole) {
+    public User(String email, String password, UserRole userRole, String firstName, String lastName) {
         this.email = email;
         this.password = password;
         this.userRole = userRole;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     @Override

@@ -25,7 +25,9 @@ public class RegistrationService {
         userService.singUpUser(new User(
                 request.getEmail(),
                 request.getPassword(),
-                UserRole.USER
+                UserRole.USER,
+                request.getFirstName(),
+                request.getLastName()
         ));
     }
 }

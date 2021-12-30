@@ -12,4 +12,6 @@ import lombok.ToString;
 public class RegistrationCredentials {
     private final String email;
     private final String password;
+    private final String firstName;
+    private final String lastName;
 }
