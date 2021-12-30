@@ -31,9 +31,6 @@ public class User implements UserDetails {
     private UserRole userRole;
     private Boolean locked = false;
     private Boolean enabled = true;
-    @OneToMany
-    @JoinColumn(name = "userId", updatable = false, insertable = false)
-    private List<ConverterHistory> converterHistory;
 
     public User(String email, String password, UserRole userRole, String firstName, String lastName) {
         this.email = email;
