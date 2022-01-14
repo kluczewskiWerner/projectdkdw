@@ -1,0 +1,97 @@
+<html>
+<head>
+  <title>Currency Converter</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Javascript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+  
+.panel {
+background: #333335;
+border: solid white;
+}
+
+.results {
+font-size: 1em;
+color: #FFFFFF;
+text-align-last: center;
+}
+
+input {
+   text-align: center;
+}
+
+select { 
+  text-align-last: center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div style="padding: 0;" class="container" *ngIf="isLoggedIn">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-primary text-center">
+      <div class="panel-heading">
+        <h4 class="panel-title">Currency Converter</h4>
+      </div>
+      <div class="panel-body">
+        <form #currencyForm="ngForm" (ngSubmit)="checkMode(currencyForm)" role="form" *ngFor="let allCurrency of allCurrency$" class="form-vertical">
+
+          <div class="form-group">
+            <input type="number" ngModel name="quantity" class="amount form-control" placeholder="Enter amount" min="0.01" step="0.01" oninput="validity.valid||(value='');">
+          </div>
+
+          <div class="form-group">
+            <div>
+              <mat-button-toggle-group class="btn-group" value="from PLN" #toggleGroup="matButtonToggleGroup">
+                <mat-button-toggle class="btn btn-primary btn-lg btn-block" value="from PLN">From PLN</mat-button-toggle>
+                <mat-button-toggle class="btn btn-primary btn-lg btn-block" value="to PLN">To PLN</mat-button-toggle>
+              </mat-button-toggle-group>
+            </div>
+            <div>
+              <label id="toggleButton" class="results">Mode {{toggleGroup.value}}</label>
+            </div>
+            <label id="results" class="results">Select currency</label>
+            <select ngModel name="code" class="form-control">
+              <option value="" [disabled]="true">-- Select currency --</option>
+              <option *ngFor="let rate of allCurrency.rates">{{ rate.code }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Convert</button>
+          </div>
+        </form>
+        <p id="result" class="results"></p>
+      </div>
+      <button id="showBtn" (click)="showTable()" class="btn btn-primary">Show/Hide table</button>
+      <div *ngIf="show">
+        <table class="table">
+          <thead>
+            <tr class="results" >
+              <th scope="col">Currency</th>
+              <th scope="col">Rate</th>
+              <th scope="col">Effective Date</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let allCurrency of allCurrency$" class="results">
+            <tr *ngFor="let rate of allCurrency.rates">
+              <td>{{ rate.code }} - {{ rate.currency }}</td>
+              <td>1 {{ rate.code }} = {{ rate.mid }} PLN</td>
+              <td>{{ allCurrency.effectiveDate }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
