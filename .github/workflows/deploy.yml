@@ -1,16 +1,18 @@
 name: Deploy to Heroku
 
 on:
-  workflow_run:
-    workflows:
-    - Java CI with Maven
-    types:
-    - completed
-    branch:
+  branch:
     - master
 
 jobs:
   build:
+  if:
+    workflow_run:
+      workflows:
+      - Java CI with Maven
+      types:
+      - completed
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
