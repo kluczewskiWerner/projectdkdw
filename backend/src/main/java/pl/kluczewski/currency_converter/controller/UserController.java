@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 import pl.kluczewski.currency_converter.model.UserDto;
-import pl.kluczewski.currency_converter.model.entity.User;
+import pl.kluczewski.currency_converter.model.entity.Customer;
 import pl.kluczewski.currency_converter.service.UserService;
 
 @CrossOrigin
@@ -18,8 +18,8 @@ public class UserController {
 
     @PutMapping("/{id}")
     public UserDto updateUser(@PathVariable Long id, @RequestBody UserDto user) {
-        UserDto userUpdated = userService.update(id, mapper.map(user, User.class));
-        return userService.update(id, mapper.map(userUpdated, User.class));
+        UserDto userUpdated = userService.update(id, mapper.map(user, Customer.class));
+        return userService.update(id, mapper.map(userUpdated, Customer.class));
     }
 
     @DeleteMapping("/{id}")

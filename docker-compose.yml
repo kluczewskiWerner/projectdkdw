@@ -1,0 +1,41 @@
+version: '3.1'
+
+services:
+
+        database:
+                container_name: database
+                image: postgres:latest
+                restart: always
+                environment:
+                  POSTGRES_DB: dkdwproject
+                  POSTGRES_USER: admin
+                  POSTGRES_PASSWORD: pass123
+                ports:
+                - "5432:5432"
+
+        backend:
+                container_name: backend
+                depends_on:
+                        - database
+                environment:
+                        - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/dkdwproject
+                        - SPRING_DATASOURCE_USERNAME=admin
+                        - SPRING_DATASOURCE_PASSWORD=pass123
+                image: backend
+                build:
+                        context: ./backend
+                        dockerfile: Dockerfile
+                ports:
+                        - "8080:8080"
+
+        frontend:
+                container_name: frontend
+                depends_on:
+                        - backend
+                        - database
+                image: frontend
+                build:
+                        context: ./frontend
+                        dockerfile: Dockerfile
+                ports:
+                        - "80:80"      

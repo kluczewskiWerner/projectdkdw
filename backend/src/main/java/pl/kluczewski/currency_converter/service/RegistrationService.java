@@ -3,7 +3,7 @@ package pl.kluczewski.currency_converter.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kluczewski.currency_converter.config.RegistrationCredentials;
-import pl.kluczewski.currency_converter.model.entity.User;
+import pl.kluczewski.currency_converter.model.entity.Customer;
 import pl.kluczewski.currency_converter.model.entity.UserRole;
 import pl.kluczewski.currency_converter.validator.EmailValidator;
 
@@ -22,7 +22,7 @@ public class RegistrationService {
             throw new IllegalStateException("Email not valid");
         }
 
-        userService.singUpUser(new User(
+        userService.singUpUser(new Customer(
                 request.getEmail(),
                 request.getPassword(),
                 UserRole.USER,
