@@ -11,7 +11,22 @@ services:
                   POSTGRES_USER: admin
                   POSTGRES_PASSWORD: pass123
                 ports:
-                - "6432:5432"
+                - "5432:5432"
+
+        backend:
+                container_name: backend
+                depends_on:
+                        - database
+                environment:
+                        - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/dkdwproject
+                        - SPRING_DATASOURCE_USERNAME=admin
+                        - SPRING_DATASOURCE_PASSWORD=pass123
+                image: backend
+                build:
+                        context: ./backend
+                        dockerfile: Dockerfile
+                ports:
+                        - "8080:8080"
 
         frontend:
                 container_name: frontend
@@ -23,13 +38,4 @@ services:
                         context: ./frontend
                         dockerfile: Dockerfile
                 ports:
-                        - "80:80"
-
-        backend:
-                container_name: backend
-                image: backend
-                build:
-                        context: ./backend
-                        dockerfile: docker/Dockerfile
-                ports:
-                        - "8081:8080"
+                        - "80:80"      

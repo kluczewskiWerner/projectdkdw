@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.kluczewski.currency_converter.model.UserDto;
-import pl.kluczewski.currency_converter.model.entity.User;
+import pl.kluczewski.currency_converter.model.entity.Customer;
 import pl.kluczewski.currency_converter.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 
@@ -26,7 +26,7 @@ public class UserService implements UserDetailsService {
                 new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
     }
 
-    public void singUpUser(User user) {
+    public void singUpUser(Customer user) {
         boolean userExist = userRepository.findByEmail(user.getUsername())
                 .isPresent();
 
@@ -44,12 +44,12 @@ public class UserService implements UserDetailsService {
         //TODO: send confirmation token
     }
 
-    public User findById(Long id) {
+    public Customer findById(Long id) {
         return userRepository.findById(id).orElseThrow();
     }
 
-    public UserDto update(Long id, User user) {
-        User userToUpdate = findById(id);
+    public UserDto update(Long id, Customer user) {
+        Customer userToUpdate = findById(id);
         userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
         return mapper.map(userToUpdate, UserDto.class);

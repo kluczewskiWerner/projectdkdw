@@ -11,14 +11,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-public class User implements UserDetails {
+public class Customer implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +31,7 @@ public class User implements UserDetails {
     private Boolean locked = false;
     private Boolean enabled = true;
 
-    public User(String email, String password, UserRole userRole, String firstName, String lastName) {
+    public Customer(String email, String password, UserRole userRole, String firstName, String lastName) {
         this.email = email;
         this.password = password;
         this.userRole = userRole;
@@ -78,7 +77,7 @@ public class User implements UserDetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        User user = (User) o;
+        Customer user = (Customer) o;
         return id != null && Objects.equals(id, user.id);
     }
 
