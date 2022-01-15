@@ -6,6 +6,8 @@ on:
     - Java CI with Maven
     types:
     - completed
+    branch:
+    - master
 
 jobs:
   build:
